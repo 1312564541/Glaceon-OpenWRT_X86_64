@@ -142,7 +142,7 @@ jobs:
       with:
         name: ${{ env.DATE }} | OpenWRT X86_64 自动编译
         allowUpdates: true
-        tag: ${{ env.tag_name }}
+        tag: WRT
         commit: master
         token: ${{ secrets.RELEASES_TOKEN }}
         body: |
