@@ -64,6 +64,11 @@ jobs:
         df -hT $PWD
         git clone --depth 1 $REPO_URL -b $REPO_BRANCH openwrt
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
+        
+    - name: Get current build info
+      run: |
+        echo "::set-env name=DATE::$(date "+%Y-%m-%d %H:%M:%S")"
+        echo "::set-env name=tag_name::$(date +%Y%m%d)"
 
     - name: Load custom feeds
       run: |
@@ -71,6 +76,8 @@ jobs:
         chmod +x $DIY_P1_SH
         cd openwrt
         $GITHUB_WORKSPACE/$DIY_P1_SH
+        useVersionInfo=$(git show -s --date=short --format="date: %cd<br/>commit: %s<br/>commit hash: %H")
+        echo "::set-env name=useVersionInfo::$useVersionInfo"
 
     - name: Update feeds
       run: cd openwrt && ./scripts/feeds update -a
@@ -140,11 +147,12 @@ jobs:
     - name: Create release
       uses: ncipollo/release-action@v1
       with:
-        name: ${{ env.DATE }} | OpenWRT X86_64 自动编译
+        name: GlaceonWRT x86_64 | ${{ env.DATE }}
         allowUpdates: true
-        tag: WRT
+        tag: ${{ env.tag_name }}
         commit: master
         token: ${{ secrets.RELEASES_TOKEN }}
-        body: 
-            使用Github Action自动编译
+        body: |
+          编译使用版本:
+          ${{ env.useVersionInfo }}
         artifacts: "${{ env.FIRMWARE }}/*"
