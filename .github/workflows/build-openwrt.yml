@@ -145,7 +145,6 @@ jobs:
         tag: WRT
         commit: master
         token: ${{ secrets.RELEASES_TOKEN }}
-        body: |
-          编译使用版本:
-          ${{ env.useVersionInfo }}
+        body: 
+            使用Github Action自动编译
         artifacts: "${{ env.FIRMWARE }}/*"
