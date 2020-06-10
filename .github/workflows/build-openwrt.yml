@@ -155,6 +155,4 @@ jobs:
         body: |
           编译使用版本:
           ${{ env.useVersionInfo }}
-        artifacts: |
-          "${{ env.FIRMWARE }}/*"
-          "openwrt/bin/*.zip"
+        artifacts: "${{ env.FIRMWARE }}/*"
