@@ -5,6 +5,12 @@
 
 适用于x86_64的精简OpenWRT固件。基于 [Lean](https://github.com/coolsnowwolf/lede) 的OpenWRT源码，使用 Github Actions 进行编译。
 
+## 特点
+
+- 非常精简、轻量，适合低配置虚拟机使用
+- 集成Zerotier，方便在外网管理
+- 未集成OpenClash，但其依赖均已安装，可自行下载IPK安装
+
 ## 致谢
 
 - [OpenWrt](https://github.com/openwrt/openwrt)
